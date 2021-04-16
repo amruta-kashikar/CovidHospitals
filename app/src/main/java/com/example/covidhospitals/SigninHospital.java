@@ -19,6 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -33,6 +34,7 @@ public class SigninHospital extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     private Button btnSignIn;
+    String uid;
     //ProgressBar progressBar;
 
     @Override
@@ -46,6 +48,7 @@ public class SigninHospital extends AppCompatActivity {
         totalBeds = findViewById(R.id.totalBeds);
         vacantBeds = findViewById(R.id.vacantBeds);
         btnSignIn = findViewById(R.id.btnSignIn);
+        uid = mAuth.getInstance().getCurrentUser().getUid();
         linklogin = new Intent(this,LoginHospital.class);
         //patientdash = new Intent(this,PatientDashboard.class);
         //progressBar = findViewById(R.id.progressBar);
@@ -54,8 +57,46 @@ public class SigninHospital extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registerUser();
+                //registerUser();
                 //finish();
+                authenticateUser();
+            }
+        });
+    }
+
+    private void authenticateUser() {
+        String email = emailHospital.getText().toString().trim();
+        String pwd = pwdHospital.getText().toString().trim();
+        if(email.isEmpty()){
+            emailHospital.setError("Enter email");
+            emailHospital.requestFocus();
+            return;
+        }
+        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            emailHospital.setError("Please enter a valid email");
+            emailHospital.requestFocus();
+            return;
+        }
+        if(pwd.isEmpty()){
+            pwdHospital.setError("Enter password");
+            pwdHospital.requestFocus();
+            return;
+        }
+        if(pwd.length()<6)
+        {
+            pwdHospital.setError("Minimum password length should be 6 characters");
+            pwdHospital.requestFocus();
+            return;
+        }
+        mAuth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(SigninHospital.this, "Hospital registered successfully", Toast.LENGTH_SHORT).show();
+                        registerUser();
+                }else {
+                    Toast.makeText(SigninHospital.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -69,6 +110,7 @@ public class SigninHospital extends AppCompatActivity {
     }
     private void registerUser()
     {
+        uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
         String name = nameHospital.getText().toString().trim();
         String phone = phoneHospital.getText().toString().trim();
         String email = emailHospital.getText().toString().trim();
@@ -129,32 +171,22 @@ public class SigninHospital extends AppCompatActivity {
         hospital.put("password",pwd);
         hospital.put("total",total);
         hospital.put("vacant",vacant);
-        db.collection("hospital")
-                .add(hospital)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
+        db.collection("hospital").document(uid)
+                .set(hospital);
+//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+//                    @Override
+//                    public void onSuccess(DocumentReference documentReference) {
+//                        Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                }).addOnFailureListener(new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull @NotNull Exception e) {
+//                Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        mAuth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(SigninHospital.this, "Hospital registered successfully", Toast.LENGTH_SHORT).show();
-
-                }else {
-                    Toast.makeText(SigninHospital.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
         //startActivity(patientdash);
 
 

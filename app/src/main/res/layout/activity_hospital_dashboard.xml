@@ -10,7 +10,7 @@
         android:id="@+id/bedRequests"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="108dp"
+        android:layout_marginTop="68dp"
         android:text="Bed requests"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -18,18 +18,35 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/vacantBeds"
+        android:layout_width="255dp"
+        android:layout_height="54dp"
         android:layout_marginTop="66dp"
+        android:drawableLeft="@drawable/ic_bed"
+        android:drawablePadding="16dp"
+        android:background="@drawable/round_border"
         android:ems="10"
+        android:hint="Update no. of vacant beds"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.557"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bedRequests"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/updateBtn"
+        android:layout_width="134dp"
+        android:layout_height="52dp"
+        android:background="@drawable/round_border"
+        android:text="update"
+        app:backgroundTint="#0099FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vacantBeds"
+        app:layout_constraintVertical_bias="0.069" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

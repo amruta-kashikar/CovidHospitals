@@ -1,2 +1,3 @@
+include ':covid'
 include ':app'
 rootProject.name = "CovidHospitals"

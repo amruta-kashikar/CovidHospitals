@@ -179,7 +179,7 @@
             android:layout_marginEnd="32dp"
             android:layout_marginRight="32dp"
             android:background="@drawable/round_bg"
-            android:text="SIGN IN"
+            android:text="SIGN UP"
             android:textSize="18sp"
             app:backgroundTint="#0099FF"
             app:layout_constraintEnd_toEndOf="parent"
