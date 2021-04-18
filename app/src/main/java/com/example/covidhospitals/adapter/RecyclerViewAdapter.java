@@ -126,19 +126,26 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             switch(v.getId()){
                 case R.id.approveBtn:
                     updateBeds();
-                    //removeItem(position);
+                    removeItem(position);
                     break;
                 case R.id.rejectBtn:
-                    removeItem(position);
+                    deleteItem(position);
                     break;
             }
         }
     }
-    public void removeItem(int position){
+    public void deleteItem(int position){
        p.deleteData(position);
        datalist.remove(position);
        notifyItemRemoved(position);
        notifyItemRangeChanged(position, datalist.size());
+
+    }
+    public void removeItem(int position){
+        p.removeData(position);
+        datalist.remove(position);
+        notifyItemRemoved(position);
+        notifyItemRangeChanged(position, datalist.size());
 
     }
 

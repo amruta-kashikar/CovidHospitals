@@ -29,8 +29,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SigninHospital extends AppCompatActivity {
-    EditText nameHospital,phoneHospital,pwdHospital,emailHospital,totalBeds,vacantBeds;
-    Intent linklogin,patientdash;
+    EditText nameHospital, phoneHospital, pwdHospital, emailHospital, totalBeds, vacantBeds;
+    Intent linklogin, hospitaldash;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     private Button btnSignIn;
@@ -47,10 +47,12 @@ public class SigninHospital extends AppCompatActivity {
         emailHospital = findViewById(R.id.emailHospital);
         totalBeds = findViewById(R.id.totalBeds);
         vacantBeds = findViewById(R.id.vacantBeds);
+        //sory wo kya hei 11 baje mera phone autometic bandh ho jata hei auto shutdown so no problem
         btnSignIn = findViewById(R.id.btnSignIn);
         uid = mAuth.getInstance().getCurrentUser().getUid();
-        linklogin = new Intent(this,LoginHospital.class);
+        linklogin = new Intent(this, LoginHospital.class);
         //patientdash = new Intent(this,PatientDashboard.class);
+        hospitaldash = new Intent(this,HospitalDashboard.class);
         //progressBar = findViewById(R.id.progressBar);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -67,110 +69,117 @@ public class SigninHospital extends AppCompatActivity {
     private void authenticateUser() {
         String email = emailHospital.getText().toString().trim();
         String pwd = pwdHospital.getText().toString().trim();
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             emailHospital.setError("Enter email");
             emailHospital.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailHospital.setError("Please enter a valid email");
             emailHospital.requestFocus();
             return;
         }
-        if(pwd.isEmpty()){
+        if (pwd.isEmpty()) {
             pwdHospital.setError("Enter password");
             pwdHospital.requestFocus();
             return;
         }
-        if(pwd.length()<6)
-        {
+        if (pwd.length() < 6) {
             pwdHospital.setError("Minimum password length should be 6 characters");
             pwdHospital.requestFocus();
             return;
         }
-        mAuth.createUserWithEmailAndPassword(email,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
+                if (task.isSuccessful()) {
+                    registerUser();
                     Toast.makeText(SigninHospital.this, "Hospital registered successfully", Toast.LENGTH_SHORT).show();
-                        registerUser();
-                }else {
+                    startActivity(hospitaldash);
+                } else {
                     Toast.makeText(SigninHospital.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
-    public void goto_login(View v)
-    {
+    public void goto_login(View v) {
         TextView Linklogin = (TextView) findViewById(R.id.loginlink);
         startActivity(linklogin);
         finish();
 
     }
-    private void registerUser()
-    {
-        uid=FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+    private void registerUser() {
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String name = nameHospital.getText().toString().trim();
         String phone = phoneHospital.getText().toString().trim();
         String email = emailHospital.getText().toString().trim();
         String pwd = pwdHospital.getText().toString().trim();
         String total = totalBeds.getText().toString().trim();
-        String vacant = vacantBeds.getText().toString().trim();
-
-        if(name.isEmpty()){
+        int vacant =0;
+        if(vacantBeds.getText().toString().isEmpty()){
+            vacantBeds.setError("Enter vacant beds");
+            vacantBeds.requestFocus();
+            return;
+        }else{
+            vacant= Integer.parseInt(vacantBeds.getText().toString());
+        }
+        if (name.isEmpty()) {
             nameHospital.setError("Enter name");
             nameHospital.requestFocus();
             return;
         }
-        if(phone.isEmpty()){
+        if (phone.isEmpty()) {
             phoneHospital.setError("Enter phone");
             phoneHospital.requestFocus();
             return;
         }
-        if((phone.length()<11) || (phone.length()>11)){
+        if ((phone.length() < 11) || (phone.length() > 11)) {
             phoneHospital.setError("Minimum phone number length should be 11 characters");
             phoneHospital.requestFocus();
             return;
         }
-        if(email.isEmpty()){
+        if (email.isEmpty()) {
             emailHospital.setError("Enter email");
             emailHospital.requestFocus();
             return;
         }
-        if(!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailHospital.setError("Please enter a valid email");
             emailHospital.requestFocus();
             return;
         }
-        if(pwd.isEmpty()){
+        if (pwd.isEmpty()) {
             pwdHospital.setError("Enter password");
             pwdHospital.requestFocus();
             return;
         }
-        if(pwd.length()<6)
-        {
+        if (pwd.length() < 6) {
             pwdHospital.setError("Minimum password length should be 6 characters");
             pwdHospital.requestFocus();
             return;
         }
-        if(total.isEmpty()){
+        if (total.isEmpty()) {
             totalBeds.setError("Enter total beds");
             totalBeds.requestFocus();
             return;
         }
-        if(vacant.isEmpty()){
+/*
+        if (vacant)) {
             vacantBeds.setError("Enter vacant beds");
             vacantBeds.requestFocus();
             return;
         }
+*/
         Map<String, Object> hospital = new HashMap<>();
-        hospital.put("name",name);
-        hospital.put("phone",phone);
-        hospital.put("email",email);
-        hospital.put("password",pwd);
-        hospital.put("total",total);
-        hospital.put("vacant",vacant);
+        hospital.put("name", name);
+        hospital.put("phone", phone);
+        hospital.put("email", email);
+        hospital.put("password", pwd);
+        hospital.put("total", total);
+//        hospital.put("vacant", vacant);
+        hospital.put("vacant", vacant);
         db.collection("hospital").document(uid)
                 .set(hospital);
 //                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -188,7 +197,6 @@ public class SigninHospital extends AppCompatActivity {
 
 
         //startActivity(patientdash);
-
 
 
     }

@@ -96,15 +96,24 @@ public class PatientsList extends AppCompatActivity {
                         int val=documentSnapshot.getLong("vacant").intValue()-1;
                         onetime.update(
                                 "vacant",val
-                                ).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                ).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onSuccess(Void aVoid) {
-                                //Log.e("A","ho gaya update");
+                            public void onComplete(@NonNull Task<Void> task) {
+                                Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(PatientsList.this, "Failed to approve request", Toast.LENGTH_SHORT).show();
                             }
                         });
 
                     }
                 });
+    }
+    public void removeData(int position) {
 
+        db.collection("hospital").document(hospitalId).collection("booking").document(datalist.get(position).getId())
+                .delete();
     }
 }

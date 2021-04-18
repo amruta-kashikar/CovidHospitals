@@ -4,13 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="30dp"
-    android:layout_marginRight="30dp"
-    android:layout_marginTop="20dp"
+    android:layout_marginStart="20dp"
+    android:layout_marginLeft="20dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="20dp"
+    android:layout_marginRight="20dp"
     android:layout_marginBottom="20dp"
     app:cardCornerRadius="15dp"
-    app:cardUseCompatPadding="true"
-    app:cardElevation="1dp">
+    app:cardElevation="1dp"
+    app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,19 +35,20 @@
 
             <TextView
                 android:id="@+id/textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_width="46dp"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
+                android:layout_weight="1"
 
-                android:text="Name"
+                android:text="Name : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="5"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -68,16 +71,17 @@
                 android:id="@+id/textView2"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
-                android:text="Age"
+                android:layout_weight="1"
+                android:text="Age : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2.2"
                 android:text="TextView "
                 android:textSize="18sp" />
         </LinearLayout>
@@ -100,16 +104,17 @@
                 android:id="@+id/textView3"
                 android:layout_width="1dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
-                android:text="Gender"
+                android:layout_weight="1"
+                android:text="Gender : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="2.2"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -130,18 +135,19 @@
 
             <TextView
                 android:id="@+id/textView4"
-                android:layout_width="15dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
-                android:text="Reaching Time"
+                android:layout_weight="1"
+                android:text="Reaching Time : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="4.2"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -162,18 +168,21 @@
 
             <TextView
                 android:id="@+id/textView5"
-                android:layout_width="26dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_marginStart="18dp"
                 android:layout_marginLeft="18dp"
-                android:text="Symptoms"
+                android:layout_weight="1"
+                android:text="Symptoms : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="5"
+                android:gravity="center"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
@@ -194,23 +203,24 @@
 
             <TextView
                 android:id="@+id/textView6"
-                android:layout_width="1dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_marginLeft="20dp"
-                android:text="Phone No."
+                android:layout_weight="1"
+                android:text="Phone No. : "
+                android:textColor="#000000"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/t6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="8"
                 android:text="TextView"
                 android:textSize="18sp" />
         </LinearLayout>
 
-        <ImageView
+        <com.zolad.zoominimageview.ZoomInImageView
             android:id="@+id/i1"
             android:layout_width="166dp"
             android:layout_height="138dp"
@@ -221,7 +231,7 @@
             app:layout_constraintTop_toBottomOf="@+id/linearLayout7"
             app:srcCompat="@drawable/bg1" />
 
-        <ImageView
+        <com.zolad.zoominimageview.ZoomInImageView
             android:id="@+id/i2"
             android:layout_width="166dp"
             android:layout_height="138dp"
@@ -239,11 +249,14 @@
             android:layout_marginStart="32dp"
             android:layout_marginLeft="32dp"
             android:layout_marginTop="20dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/round_border"
             android:text="approve"
             app:backgroundTint="#36B30C"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/rejectBtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/i2" />
 
@@ -251,18 +264,16 @@
             android:id="@+id/rejectBtn"
             android:layout_width="108dp"
             android:layout_height="48dp"
-            android:layout_marginStart="88dp"
-            android:layout_marginLeft="88dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
+            android:layout_marginEnd="34dp"
+            android:layout_marginRight="34dp"
             android:layout_marginBottom="18dp"
             android:background="@drawable/round_border"
             android:text="reject"
             app:backgroundTint="#DB0F0F"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/approveBtn"
-            app:layout_constraintTop_toBottomOf="@+id/i2" />
+            app:layout_constraintTop_toBottomOf="@+id/i2"
+            app:layout_constraintVertical_bias="1.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
