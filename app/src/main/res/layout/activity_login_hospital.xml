@@ -34,15 +34,16 @@
 
         <TextView
             android:id="@+id/toptext"
-            android:layout_width="277dp"
-            android:layout_height="79dp"
+            android:layout_width="283dp"
+            android:layout_height="92dp"
+            android:fontFamily="@font/poppins"
             android:text="Already Have An Account?"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2"
             android:textColor="#FFFFFF"
             android:textSize="33sp"
             app:layout_constraintBottom_toBottomOf="@+id/topview"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.137"
+            app:layout_constraintHorizontal_bias="0.32"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/topview" />
 

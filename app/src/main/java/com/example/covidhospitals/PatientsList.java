@@ -62,7 +62,6 @@ public class PatientsList extends AppCompatActivity {
                         for (DocumentSnapshot d : list) {
                             model obj = d.toObject(model.class);
                             obj.setId(d.getId());
-                            //Log.e("a", "i have id or what?" + d.getId());
                             datalist.add(obj);
                         }
                         adapter.notifyDataSetChanged();
@@ -91,8 +90,6 @@ public class PatientsList extends AppCompatActivity {
                 .addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        //Log.e("a","plzz Bhagwann.."+documentSnapshot.get("vacant"));
-
                         int val=documentSnapshot.getLong("vacant").intValue()-1;
                         onetime.update(
                                 "vacant",val

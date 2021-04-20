@@ -4,19 +4,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_hospitallogo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_hospitallogo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidHospitals">
-        <activity android:name=".PatientsList"></activity>
+        <activity android:name=".PatientsList" />
         <activity android:name=".HospitalDashboard" />
         <activity android:name=".SigninHospital" />
         <activity android:name=".LoginHospital" />
         <activity android:name=".MainActivity">
+        </activity>
+        <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

@@ -79,7 +79,7 @@
         android:layout_marginRight="20dp"
         android:fontFamily="@font/poppins"
         android:gravity="center"
-        android:text="Please select an option "
+        android:text="Please Select An Option "
         android:textColor="#FFFFFF"
         android:textSize="33sp"
         app:layout_constraintEnd_toEndOf="parent"

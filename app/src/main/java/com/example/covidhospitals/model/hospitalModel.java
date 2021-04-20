@@ -2,13 +2,18 @@ package com.example.covidhospitals.model;
 
 public class hospitalModel
 {
-    String name,phone,email,total,vacant,id;
+    String name;
+    String phone;
+    String email;
+    String total;
+    int vacant;
+    String id;
 
-    public hospitalModel(String vacant) {
+    public hospitalModel(int vacant) {
         this.vacant=vacant;
     }
 
-    public hospitalModel(String name, String phone, String email, String total, String vacant) {
+    public hospitalModel(String name, String phone, String email, String total, int vacant) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -48,11 +53,11 @@ public class hospitalModel
         this.total = total;
     }
 
-    public String getVacant() {
+    public int getVacant() {
         return vacant;
     }
 
-    public void setVacant(String vacant) {
+    public void setVacant(int vacant) {
         this.vacant = vacant;
     }
 

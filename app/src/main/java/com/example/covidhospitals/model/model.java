@@ -11,13 +11,10 @@ public class model {
     ArrayList<String> images;
 
     public model(){
-        //Log.e("okE","name"+name+" age"+age+"gen "+ gender+"condition "+condition+" time" +time+" phone "+phone+" iid"+id);
-
     }
 
 
     public model(String name, String age, String gender, String symptoms, String time, String phone,ArrayList<String> images,String id) {
-        //Log.e("oooooo","name"+name+" age"+age+"gen "+ gender+"condition "+condition+" time" +time+" phone "+phone+" iid"+id);
         this.name = name;
         this.age = age;
         this.gender = gender;

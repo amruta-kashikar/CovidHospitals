@@ -82,8 +82,30 @@ public class HospitalDashboard extends AppCompatActivity {
     }
 
     private void updateValue() {
-        String vacant = vacantBeds.getText().toString().trim();
-        if(!hasValidationErrors(vacant))
+        int vacant = 0;
+        if(vacantBeds.getText().toString().isEmpty()){
+            vacantBeds.setError("Enter vacant beds");
+            vacantBeds.requestFocus();
+            return;
+        }else{
+            vacant= Integer.parseInt(vacantBeds.getText().toString());
+            hospitalModel m = new hospitalModel(
+                    vacant
+            );
+            db.collection("hospital").document(hospitalId)
+                    .update(
+                            "vacant",m.getVacant()
+                    )
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(HospitalDashboard.this, "Vacant bed count updated successfully", Toast.LENGTH_LONG).show();
+                        }
+                    });
+            clearData();
+        }
+        //String vacant = vacantBeds.getText().toString().trim();
+/*        if(!hasValidationErrors(vacant))
         {
             hospitalModel m = new hospitalModel(
                     vacant
@@ -99,6 +121,12 @@ public class HospitalDashboard extends AppCompatActivity {
                         }
                     });
         }
+
+ */
+    }
+
+    private void clearData() {
+        vacantBeds.getText().clear();
     }
 
     private boolean hasValidationErrors(String vacant) {

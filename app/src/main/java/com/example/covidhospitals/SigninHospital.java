@@ -47,7 +47,6 @@ public class SigninHospital extends AppCompatActivity {
         emailHospital = findViewById(R.id.emailHospital);
         totalBeds = findViewById(R.id.totalBeds);
         vacantBeds = findViewById(R.id.vacantBeds);
-        //sory wo kya hei 11 baje mera phone autometic bandh ho jata hei auto shutdown so no problem
         btnSignIn = findViewById(R.id.btnSignIn);
         uid = mAuth.getInstance().getCurrentUser().getUid();
         linklogin = new Intent(this, LoginHospital.class);
@@ -101,7 +100,18 @@ public class SigninHospital extends AppCompatActivity {
                 }
             }
         });
+        //clearData();
     }
+
+/*    private void clearData() {
+        nameHospital.getText().clear();
+        phoneHospital.getText().clear();
+        pwdHospital.getText().clear();
+        emailHospital.getText().clear();
+        totalBeds.getText().clear();
+        vacantBeds.getText().clear();
+    }
+ */
 
     public void goto_login(View v) {
         TextView Linklogin = (TextView) findViewById(R.id.loginlink);
@@ -178,7 +188,7 @@ public class SigninHospital extends AppCompatActivity {
         hospital.put("email", email);
         hospital.put("password", pwd);
         hospital.put("total", total);
-//        hospital.put("vacant", vacant);
+//      hospital.put("vacant", vacant);
         hospital.put("vacant", vacant);
         db.collection("hospital").document(uid)
                 .set(hospital);
