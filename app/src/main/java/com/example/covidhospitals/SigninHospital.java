@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SigninHospital extends AppCompatActivity {
-    EditText nameHospital, phoneHospital, pwdHospital, emailHospital, totalBeds, vacantBeds;
+    EditText nameHospital, areaHospital,phoneHospital, pwdHospital, emailHospital, totalBeds, vacantBeds;
     Intent linklogin, hospitaldash;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -42,13 +42,14 @@ public class SigninHospital extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin_hospital);
         nameHospital = findViewById(R.id.nameHospital);
+        areaHospital = findViewById(R.id.areaHospital);
         phoneHospital = findViewById(R.id.phoneHospital);
         pwdHospital = findViewById(R.id.pwdHospital);
         emailHospital = findViewById(R.id.emailHospital);
         totalBeds = findViewById(R.id.totalBeds);
         vacantBeds = findViewById(R.id.vacantBeds);
         btnSignIn = findViewById(R.id.btnSignIn);
-        uid = mAuth.getInstance().getCurrentUser().getUid();
+        //uid = mAuth.getInstance().getCurrentUser().getUid();
         linklogin = new Intent(this, LoginHospital.class);
         //patientdash = new Intent(this,PatientDashboard.class);
         hospitaldash = new Intent(this,HospitalDashboard.class);
@@ -66,8 +67,40 @@ public class SigninHospital extends AppCompatActivity {
     }
 
     private void authenticateUser() {
+        String name = nameHospital.getText().toString().trim();
+        String area = areaHospital.getText().toString().trim();
+        String phone = phoneHospital.getText().toString().trim();
         String email = emailHospital.getText().toString().trim();
         String pwd = pwdHospital.getText().toString().trim();
+        String total = totalBeds.getText().toString().trim();
+        int vacant =0;
+        if(vacantBeds.getText().toString().isEmpty()){
+            vacantBeds.setError("Enter vacant beds");
+            vacantBeds.requestFocus();
+            return;
+        }else{
+            vacant= Integer.parseInt(vacantBeds.getText().toString());
+        }
+        if (name.isEmpty()) {
+            nameHospital.setError("Enter name");
+            nameHospital.requestFocus();
+            return;
+        }
+        if (area.isEmpty()) {
+            areaHospital.setError("Enter area");
+            areaHospital.requestFocus();
+            return;
+        }
+        if (phone.isEmpty()) {
+            phoneHospital.setError("Enter phone");
+            phoneHospital.requestFocus();
+            return;
+        }
+        if ((phone.length() < 11) || (phone.length() > 11)) {
+            phoneHospital.setError("Minimum phone number length should be 11 characters");
+            phoneHospital.requestFocus();
+            return;
+        }
         if (email.isEmpty()) {
             emailHospital.setError("Enter email");
             emailHospital.requestFocus();
@@ -86,6 +119,11 @@ public class SigninHospital extends AppCompatActivity {
         if (pwd.length() < 6) {
             pwdHospital.setError("Minimum password length should be 6 characters");
             pwdHospital.requestFocus();
+            return;
+        }
+        if (total.isEmpty()) {
+            totalBeds.setError("Enter total beds");
+            totalBeds.requestFocus();
             return;
         }
         mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -123,6 +161,7 @@ public class SigninHospital extends AppCompatActivity {
     private void registerUser() {
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String name = nameHospital.getText().toString().trim();
+        String area = areaHospital.getText().toString().trim();
         String phone = phoneHospital.getText().toString().trim();
         String email = emailHospital.getText().toString().trim();
         String pwd = pwdHospital.getText().toString().trim();
@@ -138,6 +177,11 @@ public class SigninHospital extends AppCompatActivity {
         if (name.isEmpty()) {
             nameHospital.setError("Enter name");
             nameHospital.requestFocus();
+            return;
+        }
+        if (area.isEmpty()) {
+            areaHospital.setError("Enter area");
+            areaHospital.requestFocus();
             return;
         }
         if (phone.isEmpty()) {
@@ -184,6 +228,7 @@ public class SigninHospital extends AppCompatActivity {
 */
         Map<String, Object> hospital = new HashMap<>();
         hospital.put("name", name);
+        hospital.put("area",area);
         hospital.put("phone", phone);
         hospital.put("email", email);
         hospital.put("password", pwd);

@@ -24,7 +24,7 @@ public class HospitalDashboard extends AppCompatActivity {
     EditText vacantBeds;
     TextView name;
     Button bedRequests,updateBtn,logoutBtn;
-    Intent requests;
+    Intent requests,mainActivity;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     String hospitalId;
@@ -44,7 +44,10 @@ public class HospitalDashboard extends AppCompatActivity {
         hospitalId = mAuth.getCurrentUser().getUid();
 
         requests = new Intent(this,PatientsList.class);
-        //mainActivity = new Intent(this,MainActivity.class);
+
+        mainActivity = new Intent(this, MainActivity.class);
+
+
         bedRequests.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

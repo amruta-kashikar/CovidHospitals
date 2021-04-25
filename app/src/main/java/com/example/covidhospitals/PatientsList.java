@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.covidhospitals.adapter.RecyclerViewAdapter;
 import com.example.covidhospitals.model.model;
+import com.example.covidhospitals.smsIntegration.SmsHelper;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -84,7 +85,8 @@ public class PatientsList extends AppCompatActivity {
 
 
     public void updateBedData() {
-
+        //THIS FUNCTION TRIGGER SMS DONT EDIT
+//ye function only accept par hi call hoga na? ha
         DocumentReference onetime = db.collection("hospital").document(hospitalId);
         onetime.get()
                 .addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
@@ -97,6 +99,15 @@ public class PatientsList extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
                                 Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_SHORT).show();
+                                //seting sms code
+//i need that data here to pass in rurl ok
+                                //kya karna hei pata hei, dont touch that class now
+                                //first print that data here ok
+                                //hum jo data accept kar rahe hey yaha wo muje sms me pass karna hei
+                                //so wo data muje yaha argument me chahiye like this ok
+                               ///now i am sleepy okay apko smja du kya karna hei age ha
+//                                SmsHelper asyncT = new SmsHelper();
+//                                asyncT.execute("usernmae","hopsitalname","time");
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

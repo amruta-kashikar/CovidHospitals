@@ -13,8 +13,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainActivity extends AppCompatActivity {
     Button Signbtn,Loginbtn,dashboard;
     Intent signinIntent,loginIntent,dashIntent;
-    //FirebaseAuth mAuth;
-    //String hospitalId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +21,8 @@ public class MainActivity extends AppCompatActivity {
         Signbtn = findViewById(R.id.signinbtn);
         Loginbtn = findViewById(R.id.loginbtn);
         dashboard = findViewById(R.id.dashboard);
-      //  mAuth = FirebaseAuth.getInstance();
-       // hospitalId = mAuth.getCurrentUser().getUid();
+        //mAuth = FirebaseAuth.getInstance();
+        //hospitalId = mAuth.getCurrentUser().getUid();
         signinIntent = new Intent(this,SigninHospital.class);
         loginIntent = new Intent(this,LoginHospital.class);
         dashIntent = new Intent(this,HospitalDashboard.class);
@@ -40,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(loginIntent);
+                //dashboard.setVisibility(View.VISIBLE);
             }
         });
+
         dashboard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
