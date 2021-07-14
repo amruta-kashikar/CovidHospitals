@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SigninHospital extends AppCompatActivity {
-    EditText nameHospital, areaHospital,phoneHospital, pwdHospital, emailHospital, totalBeds, vacantBeds;
+    EditText nameHospital, areaHospital,phoneHospital, pwdHospital, emailHospital, totalBeds, vacantBeds,o2Beds,nonO2Beds,icuBeds,ventilatorBeds;
     Intent linklogin, hospitaldash;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
@@ -48,6 +48,10 @@ public class SigninHospital extends AppCompatActivity {
         emailHospital = findViewById(R.id.emailHospital);
         totalBeds = findViewById(R.id.totalBeds);
         vacantBeds = findViewById(R.id.vacantBeds);
+        o2Beds = findViewById(R.id.o2Beds);
+        nonO2Beds = findViewById(R.id.nonO2Beds);
+        icuBeds = findViewById(R.id.icuBeds);
+        ventilatorBeds = findViewById(R.id.ventilatorBeds);
         btnSignIn = findViewById(R.id.btnSignIn);
         //uid = mAuth.getInstance().getCurrentUser().getUid();
         linklogin = new Intent(this, LoginHospital.class);
@@ -74,6 +78,10 @@ public class SigninHospital extends AppCompatActivity {
         String pwd = pwdHospital.getText().toString().trim();
         String total = totalBeds.getText().toString().trim();
         int vacant =0;
+        int o2 = 0;
+        int nonO2=0;
+        int icu=0;
+        int ventilator = 0;
         if(vacantBeds.getText().toString().isEmpty()){
             vacantBeds.setError("Enter vacant beds");
             vacantBeds.requestFocus();
@@ -81,6 +89,46 @@ public class SigninHospital extends AppCompatActivity {
         }else{
             vacant= Integer.parseInt(vacantBeds.getText().toString());
         }
+        if(o2Beds.getText().toString().isEmpty()){
+            o2Beds.setError("Enter O2 beds");
+            o2Beds.requestFocus();
+            return;
+        }
+        else
+        {
+            o2 = Integer.parseInt(o2Beds.getText().toString());
+        }
+        //
+        if(nonO2Beds.getText().toString().isEmpty()){
+            nonO2Beds.setError("Enter Non-O2 beds");
+            nonO2Beds.requestFocus();
+            return;
+        }
+        else
+        {
+            nonO2 = Integer.parseInt(nonO2Beds.getText().toString());
+        }
+        //
+        if(icuBeds.getText().toString().isEmpty()){
+            icuBeds.setError("Enter ICU beds");
+            icuBeds.requestFocus();
+            return;
+        }
+        else
+        {
+            icu = Integer.parseInt(o2Beds.getText().toString());
+        }
+        //
+        if(ventilatorBeds.getText().toString().isEmpty()){
+            ventilatorBeds.setError("Enter Ventilator beds");
+            ventilatorBeds.requestFocus();
+            return;
+        }
+        else
+        {
+            ventilator = Integer.parseInt(o2Beds.getText().toString());
+        }
+
         if (name.isEmpty()) {
             nameHospital.setError("Enter name");
             nameHospital.requestFocus();
@@ -167,12 +215,56 @@ public class SigninHospital extends AppCompatActivity {
         String pwd = pwdHospital.getText().toString().trim();
         String total = totalBeds.getText().toString().trim();
         int vacant =0;
+        int o2 = 0;
+        int nonO2=0;
+        int icu=0;
+        int ventilator = 0;
         if(vacantBeds.getText().toString().isEmpty()){
             vacantBeds.setError("Enter vacant beds");
             vacantBeds.requestFocus();
             return;
         }else{
             vacant= Integer.parseInt(vacantBeds.getText().toString());
+        }
+        // for O2 beds
+        if(o2Beds.getText().toString().isEmpty()){
+            o2Beds.setError("Enter O2 beds");
+            o2Beds.requestFocus();
+            return;
+        }
+        else
+        {
+            o2 = Integer.parseInt(o2Beds.getText().toString());
+        }
+        // for Non-O2 Beds
+        if(nonO2Beds.getText().toString().isEmpty()){
+            nonO2Beds.setError("Enter Non-O2 beds");
+            nonO2Beds.requestFocus();
+            return;
+        }
+        else
+        {
+            nonO2 = Integer.parseInt(nonO2Beds.getText().toString());
+        }
+        // For ICU Beds
+        if(icuBeds.getText().toString().isEmpty()){
+            icuBeds.setError("Enter ICU beds");
+            icuBeds.requestFocus();
+            return;
+        }
+        else
+        {
+            icu = Integer.parseInt(o2Beds.getText().toString());
+        }
+        // For Ventilator Beds
+        if(ventilatorBeds.getText().toString().isEmpty()){
+            ventilatorBeds.setError("Enter Ventilator beds");
+            ventilatorBeds.requestFocus();
+            return;
+        }
+        else
+        {
+            ventilator = Integer.parseInt(o2Beds.getText().toString());
         }
         if (name.isEmpty()) {
             nameHospital.setError("Enter name");
@@ -235,6 +327,10 @@ public class SigninHospital extends AppCompatActivity {
         hospital.put("total", total);
 //      hospital.put("vacant", vacant);
         hospital.put("vacant", vacant);
+        hospital.put("o2",o2);
+        hospital.put("nonO2",nonO2);
+        hospital.put("icu",icu);
+        hospital.put("ventilator",ventilator);
         db.collection("hospital").document(uid)
                 .set(hospital);
 //                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {

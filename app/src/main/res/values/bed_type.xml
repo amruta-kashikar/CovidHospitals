@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="bed_type">
+        <item>O2</item>
+        <item>Non-O2</item>
+        <item>ICU</item>
+        <item>Ventilator</item>
+    </string-array>
+</resources>

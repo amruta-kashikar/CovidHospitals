@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.covidhospitals">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_hospitallogo"
@@ -9,15 +12,24 @@
         android:roundIcon="@mipmap/ic_hospitallogo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CovidHospitals">
+        <activity android:name=".DetailsPatient"></activity>
+        <activity android:name=".ViewPatients" />
+        <activity android:name=".AddPatient" />
+        <activity android:name=".UpdateBedData" />
+        <activity android:name=".BedRequests" />
+        <activity android:name=".EditHospital" />
+        <activity android:name=".DeleteHospital" />
+        <activity android:name=".AddHospital" />
+        <activity android:name=".ControlRoom" />
         <activity android:name=".PatientsList" />
         <activity android:name=".HospitalDashboard" />
         <activity android:name=".SigninHospital" />
         <activity android:name=".LoginHospital" />
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".MainActivity" />
         <activity android:name=".SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

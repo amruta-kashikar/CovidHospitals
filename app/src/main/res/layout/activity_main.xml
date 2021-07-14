@@ -24,7 +24,7 @@
         app:backgroundTint="#0099FF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/signinbtn" />
+        app:layout_constraintTop_toBottomOf="@+id/view7" />
 
     <Button
         android:id="@+id/dashboard"
@@ -44,7 +44,7 @@
         app:layout_constraintTop_toBottomOf="@+id/loginbtn"
         app:layout_constraintVertical_bias="0.046" />
 
-    <Button
+<!--    <Button
         android:id="@+id/signinbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view7" />
+        app:layout_constraintTop_toBottomOf="@+id/view7" />  -->
 
     <View
         android:id="@+id/view7"
@@ -85,5 +85,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view6" />
+
+    <Button
+        android:id="@+id/controlRoom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="43dp"
+        android:layout_marginBottom="340dp"
+        android:background="@drawable/round_border"
+        android:text="control room"
+        android:textSize="20sp"
+        app:backgroundTint="#0099FF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard"
+        app:layout_constraintVertical_bias="0.046" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

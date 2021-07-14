@@ -93,18 +93,15 @@
             android:layout_width="219dp"
             android:layout_height="50dp"
             android:layout_marginStart="32dp"
-            android:layout_marginLeft="32dp"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="40dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginRight="32dp"
-            android:background="@drawable/round_bg"
+            android:background="@drawable/round_border"
             android:text="LOGIN"
             android:textSize="18sp"
             app:backgroundTint="#0099ff"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pwdHospital" />
+            app:layout_constraintTop_toBottomOf="@+id/layoutUser" />
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -136,7 +133,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
 
-        <TextView
+<!--        <TextView
             android:id="@+id/newUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -155,7 +152,28 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forgotPassword"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0" />  -->
+
+        <LinearLayout
+            android:id="@+id/layoutUser"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/pwdHospital"
+            tools:layout_editor_absoluteX="1dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="User Type :" />
+
+            <Spinner
+                android:id="@+id/spinnerUser"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

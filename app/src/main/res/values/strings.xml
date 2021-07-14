@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">CovidHospitals</string>
+    <string name="app_name">Covid Hospitals</string>
+    <string name="bed_requests"><u>Bed Requests Status</u></string>
 </resources>

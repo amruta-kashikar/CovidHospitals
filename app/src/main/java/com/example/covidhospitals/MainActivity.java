@@ -11,29 +11,30 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
-    Button Signbtn,Loginbtn,dashboard;
+    Button Signbtn,Loginbtn,dashboard,controlRoom;
     Intent signinIntent,loginIntent,dashIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Signbtn = findViewById(R.id.signinbtn);
+        //Signbtn = findViewById(R.id.signinbtn);
         Loginbtn = findViewById(R.id.loginbtn);
         dashboard = findViewById(R.id.dashboard);
+        controlRoom = findViewById(R.id.controlRoom);
         //mAuth = FirebaseAuth.getInstance();
         //hospitalId = mAuth.getCurrentUser().getUid();
-        signinIntent = new Intent(this,SigninHospital.class);
+        //signinIntent = new Intent(this,SigninHospital.class);
         loginIntent = new Intent(this,LoginHospital.class);
         dashIntent = new Intent(this,HospitalDashboard.class);
 
-        Signbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(signinIntent);
-                //finish();
-            }
-        });
+//        Signbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(signinIntent);
+//                //finish();
+//            }
+//        });
         Loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,6 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
     */
                 startActivity(dashIntent);
+            }
+        });
+        controlRoom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent controlroom = new Intent(MainActivity.this,ControlRoom.class);
+                startActivity(controlroom);
             }
         });
     }

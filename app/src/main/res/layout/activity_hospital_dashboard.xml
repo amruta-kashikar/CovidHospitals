@@ -14,31 +14,99 @@
             android:id="@+id/bedRequests"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/round_border"
             android:text="Bed requests"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view5" />
 
+<!--
         <EditText
             android:id="@+id/vacantBeds"
             android:layout_width="298dp"
             android:layout_height="53dp"
-            android:layout_marginTop="52dp"
+            android:layout_marginTop="20dp"
             android:background="@drawable/round_border"
             android:drawableLeft="@drawable/ic_bed"
             android:drawablePadding="16dp"
             android:ems="10"
-            android:hint="Update no. of vacant beds"
+            android:hint="Update no. of Vacant beds"
             android:inputType="textPersonName"
             android:padding="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bedRequests" />
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout11" />
+
+        <EditText
+            android:id="@+id/ventilatorBeds"
+            android:layout_width="325dp"
+            android:layout_height="51dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/round_border"
+            android:drawableLeft="@drawable/ic_bed"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Update no. of Ventilator beds"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/updateIcuBtn" />
+
+        <EditText
+            android:id="@+id/icuBeds"
+            android:layout_width="298dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/round_border"
+            android:drawableLeft="@drawable/ic_bed"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Update no. of ICU beds"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/updateNonO2Btn" />
+
+        <EditText
+            android:id="@+id/nonO2Beds"
+            android:layout_width="298dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_border"
+            android:drawableLeft="@drawable/ic_bed"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Update no. of Non-O2 beds"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/updateO2Btn" />
+
+        <EditText
+            android:id="@+id/o2Beds"
+            android:layout_width="298dp"
+            android:layout_height="53dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_border"
+            android:drawableLeft="@drawable/ic_bed"
+            android:drawablePadding="16dp"
+            android:ems="10"
+            android:hint="Update no. of O2 beds"
+            android:inputType="textPersonName"
+            android:padding="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.495"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/updateBtn" />
 
         <Button
             android:id="@+id/updateBtn"
@@ -54,14 +122,108 @@
             app:layout_constraintTop_toBottomOf="@+id/vacantBeds" />
 
         <Button
+            android:id="@+id/updateO2Btn"
+            android:layout_width="131dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/round_border"
+            android:text="update"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/o2Beds" />
+
+        <Button
+            android:id="@+id/updateNonO2Btn"
+            android:layout_width="131dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/round_border"
+            android:text="update"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nonO2Beds" />
+
+        <Button
+            android:id="@+id/updateIcuBtn"
+            android:layout_width="131dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/round_border"
+            android:text="update"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/icuBeds" />
+
+
+        <Button
+            android:id="@+id/updateVentilatorBtn"
+            android:layout_width="131dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/round_border"
+            android:text="update"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ventilatorBeds"
+            app:layout_constraintVertical_bias="0.0" />
+            -->
+
+        <Button
+            android:id="@+id/manageBedsBtn"
+            android:layout_width="163dp"
+            android:layout_height="52dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="159dp"
+            android:layout_marginBottom="96dp"
+            android:background="@drawable/round_border"
+            android:drawablePadding="16dp"
+            android:text="manage bed"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bedRequests"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
+            android:id="@+id/addPatientBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="159dp"
+            android:layout_marginBottom="96dp"
+            android:background="@drawable/round_border"
+            android:text="add patient"
+            android:textSize="18sp"
+            app:backgroundTint="#0099FF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.507"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/manageBedsBtn"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <Button
             android:id="@+id/logoutBtn"
             android:layout_width="163dp"
             android:layout_height="52dp"
             android:layout_marginStart="160dp"
-            android:layout_marginLeft="160dp"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="159dp"
-            android:layout_marginRight="159dp"
             android:layout_marginBottom="96dp"
             android:background="@drawable/round_border"
             android:drawableLeft="@drawable/ic_logout"
@@ -71,10 +233,10 @@
             app:backgroundTint="#0099FF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.521"
+            app:layout_constraintHorizontal_bias="0.507"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/updateBtn"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/addPatientBtn"
+            app:layout_constraintVertical_bias="0.0" />
 
         <View
             android:id="@+id/view4"
@@ -125,6 +287,34 @@
             app:layout_constraintHorizontal_bias="0.129"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+ <!---       <LinearLayout
+            android:id="@+id/linearLayout11"
+            android:layout_width="409dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@+id/bedRequests"
+            tools:layout_editor_absoluteX="2dp">
+
+            <TextView
+                android:id="@+id/textView16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Vacant Beds : "
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/vacbed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="TextView"
+                android:textSize="18sp" />
+        </LinearLayout>
+        -->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

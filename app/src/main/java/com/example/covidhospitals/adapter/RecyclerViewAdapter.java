@@ -1,14 +1,12 @@
 package com.example.covidhospitals.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,18 +15,10 @@ import com.bumptech.glide.Glide;
 import com.example.covidhospitals.PatientsList;
 import com.example.covidhospitals.R;
 import com.example.covidhospitals.model.model;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.myviewholder>
 {
@@ -38,20 +28,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     //PatientsList patientsLi
     PatientsList p;
     ArrayList<model> datalist;
-   //ohh its required
+
     Context context;
 
     public RecyclerViewAdapter(ArrayList<model> datalist,Context context,PatientsList p) {
         this.datalist = datalist;
         this.p=p;
-        this.context = context;//wrong casting
+        this.context = context;
     }
 
     @NonNull
     @Override
     public myviewholder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.patient_details,parent,false);
-
         return new myviewholder(view);
     }
 
@@ -63,6 +52,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.t4.setText(datalist.get(position).getSymptoms());
         holder.t5.setText(datalist.get(position).getTime());
         holder.t6.setText(datalist.get(position).getPhone());
+        holder.t7.setText(datalist.get(position).getGenId());
+        holder.t8.setText(datalist.get(position).getBedType());
 
         ArrayList<String> paths = datalist.get(position).getImages();
         if(paths!=null){
@@ -93,7 +84,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     class myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        TextView t1,t2,t3,t4,t5,t6;
+        TextView t1,t2,t3,t4,t5,t6,t7,t8;
         ImageView i1,i2;
         private int position;
 
@@ -105,6 +96,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
             t4 = itemView.findViewById(R.id.t4);
             t5 = itemView.findViewById(R.id.t5);
             t6 = itemView.findViewById(R.id.t6);
+            t7 = itemView.findViewById(R.id.t7);
+            t8 = itemView.findViewById(R.id.t8);
             i1 = itemView.findViewById(R.id.i1);
             i2 = itemView.findViewById(R.id.i2);
             approveBtn = itemView.findViewById(R.id.approveBtn);
@@ -119,28 +112,31 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public void setListeners() {
                 approveBtn.setOnClickListener(myviewholder.this);
-                rejectBtn.setOnClickListener(myviewholder.this);
+                //rejectBtn.setOnClickListener(myviewholder.this);
             }
         @Override
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.approveBtn:
-                    updateBeds();
+//                    updateBeds();
+                    model dardi=datalist.get(position);
+                    updateBeds(dardi);
                     removeItem(position);
                     break;
-                case R.id.rejectBtn:
-                    deleteItem(position);
-                    break;
+//                case R.id.rejectBtn:
+//                    deleteItem(position);
+//                    break;
             }
         }
-    }
-    public void deleteItem(int position){
-       p.deleteData(position);
-       datalist.remove(position);
-       notifyItemRemoved(position);
-       notifyItemRangeChanged(position, datalist.size());
 
     }
+//    public void deleteItem(int position){
+//       p.deleteData(position);
+//       datalist.remove(position);
+//       notifyItemRemoved(position);
+//       notifyItemRangeChanged(position, datalist.size());
+//
+//    }
     public void removeItem(int position){
         p.removeData(position);
         datalist.remove(position);
@@ -148,8 +144,11 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         notifyItemRangeChanged(position, datalist.size());
 
     }
+    private void updateBeds(model dardi) {
+        p.updateBedData(dardi);
+    };
 
-    private void updateBeds() {
-        p.updateBedData();
-        };
+//    private void updateBeds() {
+//        p.updateBedData();
+//        };
 }

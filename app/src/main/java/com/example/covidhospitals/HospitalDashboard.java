@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.covidhospitals.adapter.HospitalListAdapter;
 import com.example.covidhospitals.model.hospitalModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -21,31 +22,44 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class HospitalDashboard extends AppCompatActivity {
-    EditText vacantBeds;
-    TextView name;
-    Button bedRequests,updateBtn,logoutBtn;
-    Intent requests,mainActivity;
+    EditText vacantBeds,o2Beds,nonO2Beds,icuBeds,ventilatorBeds;
+    TextView name,vacbed;
+    Button bedRequests, logoutBtn,manageBedsBtn, addPatientBtn; //updateBtn, updateO2Btn, updateNonO2Btn, updateIcuBtn, updateVentilatorBtn;
+    Intent requests, mainActivity;
     FirebaseAuth mAuth;
     FirebaseFirestore db;
     String hospitalId;
-    //private hospitalModel bed;
-    //
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hospital_dashboard);
         bedRequests = findViewById(R.id.bedRequests);
         vacantBeds = findViewById(R.id.vacantBeds);
-        updateBtn = findViewById(R.id.updateBtn);
+        o2Beds = findViewById(R.id.o2Beds);
+        nonO2Beds = findViewById(R.id.nonO2Beds);
+        icuBeds = findViewById(R.id.icuBeds);
+        ventilatorBeds = findViewById(R.id.ventilatorBeds);
+//        updateBtn = findViewById(R.id.updateBtn);
+//        updateO2Btn = findViewById(R.id.updateO2Btn);
+//        updateNonO2Btn = findViewById(R.id.updateNonO2Btn);
+//        updateIcuBtn = findViewById(R.id.updateIcuBtn);
+//        updateVentilatorBtn = findViewById(R.id.updateVentilatorBtn);
+        manageBedsBtn = findViewById(R.id.manageBedsBtn);
         logoutBtn = findViewById(R.id.logoutBtn);
+        addPatientBtn = findViewById(R.id.addPatientBtn);
         name = findViewById(R.id.hospitalName);
+        //vacbed = findViewById(R.id.vacbed);
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         hospitalId = mAuth.getCurrentUser().getUid();
+        //vacantBeds.setText(String.valueOf(hospitalModel.getVacant()));
 
-        requests = new Intent(this,PatientsList.class);
+        requests = new Intent(this, PatientsList.class);
 
         mainActivity = new Intent(this, MainActivity.class);
+        //updateBed = new Intent(this, UpdateBedData.class);
 
 
         bedRequests.setOnClickListener(new View.OnClickListener() {
@@ -54,18 +68,34 @@ public class HospitalDashboard extends AppCompatActivity {
                 startActivity(requests);
             }
         });
-        updateBtn.setOnClickListener(new View.OnClickListener() {
+        manageBedsBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                updateValue();
+                Intent manage = new Intent(HospitalDashboard.this,UpdateBedData.class);
+                startActivity(manage);
             }
         });
+//        updateBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                updateValue();
+//            }
+//        });
+//
+        addPatientBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent add = new Intent(HospitalDashboard.this,AddPatient.class);
+                startActivity(add);
+            }
+        });
+
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mAuth.signOut();
                 //finish();
-                startActivity(new Intent(HospitalDashboard.this,MainActivity.class));
+                startActivity(new Intent(HospitalDashboard.this, MainActivity.class));
             }
         });
 
@@ -73,18 +103,27 @@ public class HospitalDashboard extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if(task.isSuccessful()){
-                            if(task.getResult().exists()){
+                        if (task.isSuccessful()) {
+                            if (task.getResult().exists()) {
                                 String userName = task.getResult().getString("name");
+//                                String vacBed = String.valueOf(task.getResult().getLong("vacant"));
+//                                String o2Bed = String.valueOf(task.getResult().getLong("o2"));
+//                                String nonO2Bed = String.valueOf(task.getResult().getLong("nonO2"));
+//                                String icuBed = String.valueOf(task.getResult().getLong("icu"));
+//                                String ventilatorBed = String.valueOf(task.getResult().getLong("ventilator"));
                                 name.setText(userName);
-
+//                                vacbed.setText(vacBed);
+//                                o2Beds.setText(o2Bed);
+//                                nonO2Beds.setText(nonO2Bed);
+//                                icuBeds.setText(icuBed);
+//                                ventilatorBeds.setText(ventilatorBed);
                             }
                         }
                     }
                 });
     }
 
-    private void updateValue() {
+/*    private void updateValue() {
         int vacant = 0;
         if(vacantBeds.getText().toString().isEmpty()){
             vacantBeds.setError("Enter vacant beds");
@@ -107,6 +146,8 @@ public class HospitalDashboard extends AppCompatActivity {
                     });
             clearData();
         }
+
+ */
         //String vacant = vacantBeds.getText().toString().trim();
 /*        if(!hasValidationErrors(vacant))
         {
@@ -124,21 +165,19 @@ public class HospitalDashboard extends AppCompatActivity {
                         }
                     });
         }
-
  */
     }
 
-    private void clearData() {
-        vacantBeds.getText().clear();
-    }
+//    private void clearData() {
+//        vacantBeds.getText().clear();
+//    }
 
-    private boolean hasValidationErrors(String vacant) {
-        if(vacant.isEmpty()){
-            vacantBeds.setError("Enter vacant beds");
-            vacantBeds.requestFocus();
-            return true;
-        }
-        return false;
-    }
+//    private boolean hasValidationErrors(String vacant) {
+//        if(vacant.isEmpty()){
+//            vacantBeds.setError("Enter vacant beds");
+//            vacantBeds.requestFocus();
+//            return true;
+//        }
+//        return false;
+//    }
 
-}

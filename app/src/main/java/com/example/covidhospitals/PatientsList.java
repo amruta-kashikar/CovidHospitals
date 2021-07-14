@@ -1,12 +1,16 @@
 package com.example.covidhospitals;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,9 +24,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,51 +75,161 @@ public class PatientsList extends AppCompatActivity {
                 });
     }
 
-    public void deleteData(int position) {
+//    public void deleteData(int position) {
+//
+//        db.collection("hospital").document(hospitalId).collection("booking").document(datalist.get(position).getId())
+//                .delete()
+//                .addOnCompleteListener(task -> Toast.makeText(PatientsList.this, "Rejected Request Successfully", Toast.LENGTH_LONG).show())
+//                .addOnFailureListener(new OnFailureListener() {
+//                    @Override
+//                    public void onFailure(@NonNull Exception e) {
+//                        Toast.makeText(PatientsList.this, "Failed to reject request", Toast.LENGTH_LONG).show();
+//                    }
+//                });
+//    }
 
-        db.collection("hospital").document(hospitalId).collection("booking").document(datalist.get(position).getId())
-                .delete()
-                .addOnCompleteListener(task -> Toast.makeText(PatientsList.this, "Rejected Request Successfully", Toast.LENGTH_LONG).show())
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(PatientsList.this, "Failed to reject request", Toast.LENGTH_LONG).show();
-                    }
-                });
-    }
 
-
-    public void updateBedData() {
-        //THIS FUNCTION TRIGGER SMS DONT EDIT
-//ye function only accept par hi call hoga na? ha
+    public void updateBedData(model dardi) {
+        Log.d("TAG", "approveBtn() returned: " +dardi.getBedType() );
         DocumentReference onetime = db.collection("hospital").document(hospitalId);
         onetime.get()
                 .addOnSuccessListener(this, new OnSuccessListener<DocumentSnapshot>() {
+                    DocumentSnapshot sn=null;
                     @Override
                     public void onSuccess(DocumentSnapshot documentSnapshot) {
-                        int val=documentSnapshot.getLong("vacant").intValue()-1;
+                        sn=documentSnapshot;
+                        if(dardi.getBedType().equals("O2"))
+                        {
+                            int val = documentSnapshot.getLong("o2").intValue()-1;
+                            int vacantval=documentSnapshot.getLong("vacant").intValue()-1;
+                            onetime.update(
+                                    "o2",val,
+                                    "vacant",vacantval
+                            ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    String smsBody=String.format("%s your request for bed has been approved by %s " +
+                                            "if you don't reach the hospital within %s" +
+                                            "\n your request will get cancelled \n" +
+                                            "\n unique code for verification at hospital is : %s" +
+                                            "\n bed allocated to you is %s bed " +
+                                            "Regards,\n %s",dardi.getName() , sn.get("name"),dardi.getTime(),dardi.getGenId(),dardi.getBedType(),sn.get("name"));
+                                    String dardiKaNumber=dardi.getPhone();
+                                    Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_LONG).show();
+                                    SmsHelper asyncT = new SmsHelper();
+                                    asyncT.execute(dardiKaNumber,smsBody);
+                                }
+                            });
+                        }
+                        if(dardi.getBedType().equals("Non-O2"))
+                        {
+                            int val = documentSnapshot.getLong("nonO2").intValue()-1;
+                            int vacantval=documentSnapshot.getLong("vacant").intValue()-1;
+                            onetime.update(
+                                    "nonO2",val,
+                                    "vacant",vacantval
+                            ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    Toast.makeText(PatientsList.this, "Updated value of Non-O2 bed", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+                        if(dardi.getBedType().equals("ICU"))
+                        {
+                            int val = documentSnapshot.getLong("icu").intValue()-1;
+                            int vacantval=documentSnapshot.getLong("vacant").intValue()-1;
+                            onetime.update(
+                                    "icu",val,
+                                    "vacant",vacantval
+                            ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    String smsBody=String.format("%s your request for bed has been approved by %s " +
+                                            "if you don't reach the hospital within %s" +
+                                            "\n your request will get cancelled \n" +
+                                            "\n unique code for verification at hospital is : %s" +
+                                            "\n bed allocated to you is %s bed " +
+                                            "Regards,\n %s",dardi.getName() , sn.get("name"),dardi.getTime(),dardi.getGenId(),dardi.getBedType(),sn.get("name"));
+                                    String dardiKaNumber=dardi.getPhone();
+                                    Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_LONG).show();
+                                    SmsHelper asyncT = new SmsHelper();
+                                    asyncT.execute(dardiKaNumber,smsBody);
+                                }
+                            });
+                        }
+
+//                        if(dardi.getBedType().equals("ICU"))
+//                        {
+//                            int val = documentSnapshot.getLong("icu").intValue()-1;
+//                            int vacantval=documentSnapshot.getLong("vacant").intValue()-1;
+//                            onetime.update(
+//                                    "icu",val,
+//                                    "vacant",vacantval
+//                            ).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+//                                    String smsBody=String.format("%s your request for bed has been approved by %s " +
+//                                            "if you don't reach the hospital within %s" +
+//                                            "\n your request will get cancelled \n" +
+//                                            "\n unique code for verification at hospital is : %s" +
+//                                            "\n bed allocated to you is %s bed " +
+//                                            "Regards,\n %s",dardi.getName() , sn.get("name"),dardi.getTime(),dardi.getGenId(),dardi.getBedType(),sn.get("name"));
+//                                    String dardiKaNumber=dardi.getPhone();
+//                                    Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_LONG).show();
+//                                    SmsHelper asyncT = new SmsHelper();
+//                                    asyncT.execute(dardiKaNumber,smsBody);
+//                                }
+//                            });
+//                        }
+                        if(dardi.getBedType().equals("Ventilator"))
+                        {
+                            int val = documentSnapshot.getLong("ventilator").intValue()-1;
+                            int vacantval=documentSnapshot.getLong("vacant").intValue()-1;
+                            onetime.update(
+                                    "ventilator",val,
+                                    "vacant",vacantval
+                            ).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    String smsBody=String.format("%s your request for bed has been approved by %s " +
+                                            "if you don't reach the hospital within %s" +
+                                            "\n your request will get cancelled \n" +
+                                            "\n unique code for verification at hospital is : %s" +
+                                            "\n bed allocated to you is %s bed " +
+                                            "Regards,\n %s",dardi.getName() , sn.get("name"),dardi.getTime(),dardi.getGenId(),dardi.getBedType(),sn.get("name"));
+                                    String dardiKaNumber=dardi.getPhone();
+                                    Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_LONG).show();
+                                    SmsHelper asyncT = new SmsHelper();
+                                    asyncT.execute(dardiKaNumber,smsBody);
+                                }
+                            });
+                        }
+
+                       /* int val=documentSnapshot.getLong("vacant").intValue()-1;
                         onetime.update(
                                 "vacant",val
                                 ).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_SHORT).show();
-                                //seting sms code
-//i need that data here to pass in rurl ok
-                                //kya karna hei pata hei, dont touch that class now
-                                //first print that data here ok
-                                //hum jo data accept kar rahe hey yaha wo muje sms me pass karna hei
-                                //so wo data muje yaha argument me chahiye like this ok
-                               ///now i am sleepy okay apko smja du kya karna hei age ha
-//                                SmsHelper asyncT = new SmsHelper();
-//                                asyncT.execute("usernmae","hopsitalname","time");
-                            }
+                            public void onComplete(@NonNull Task<Void> task) {*/
+//                        String smsBody=String.format("%s your request for bed has been approved by %s " +
+//                                "if you don't reach the hospital within %s" +
+//                                "\n your request will get cancelled \n" +
+//                                "\n unique code for verification at hospital is : %s" +
+//                                "\n bed allocated to you is %s bed " +
+//                                "Regards,\n %s",dardi.getName() , sn.get("name"),dardi.getTime(),dardi.getGenId(),dardi.getBedType(),sn.get("name"));
+//                        String dardiKaNumber=dardi.getPhone();
+//                        Toast.makeText(PatientsList.this, "Approved request successfully", Toast.LENGTH_LONG).show();
+//                                                SmsHelper asyncT = new SmsHelper();
+//                                                      asyncT.execute(dardiKaNumber,smsBody);
+                        /*    }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(PatientsList.this, "Failed to approve request", Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                            }*/
+                        //
+                        // });
 
                     }
                 });
