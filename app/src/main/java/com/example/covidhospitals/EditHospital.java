@@ -24,7 +24,7 @@ public class EditHospital extends AppCompatActivity {
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
     FirebaseFirestore db;
     EditHospAdapter adapter;
-    //String hospitalId;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
