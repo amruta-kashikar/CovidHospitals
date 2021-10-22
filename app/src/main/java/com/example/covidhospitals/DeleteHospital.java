@@ -39,7 +39,7 @@ public class DeleteHospital extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         detaillist = new ArrayList<>();
         adapter = new HospitalListAdapter(detaillist,this);
-//        hospitalId = mAuth.getCurrentUser().getUid();
+
         recyclerView.setAdapter(adapter);
         db = FirebaseFirestore.getInstance();
         db.collection("hospital").get()
@@ -60,9 +60,7 @@ public class DeleteHospital extends AppCompatActivity {
     }
 
     public void deleteHospital(String position){
-        //Log.d("TAG", "deleteHospital() returned: " + position);
-        //db.collection("hospital").document(detaillist.get(position).getId())
-        //db.collection("hospital").document(detaillist.get(position).getId())
+        
         db.collection("hospital").document(position)
                 .delete()
                 .addOnCompleteListener(task -> Toast.makeText(DeleteHospital.this, "Deleted Hospital Successfully", Toast.LENGTH_SHORT).show())

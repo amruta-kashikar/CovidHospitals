@@ -38,7 +38,7 @@ public class DetailsPatient extends AppCompatActivity {
         recview = (RecyclerView) findViewById(R.id.recview);
         i1 = findViewById(R.id.i1);
         i2 = findViewById(R.id.i2);
-//        Intent viewPat = getIntent();
+
         hospitalId = getIntent().getStringExtra("id");
         recview.setLayoutManager(new LinearLayoutManager(this));
         datalist = new ArrayList<>();

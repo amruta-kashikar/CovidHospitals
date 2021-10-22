@@ -22,10 +22,7 @@ public class ControlRoom extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_control_room);
-//        TextView totalRequests;
-//        FirebaseFirestore db = FirebaseFirestore.getInstance();
-//        Task<QuerySnapshot> datalist = db.collection("patient").get();
-//        String count = String.valueOf(datalist.size());
+
         Button addHospital,editHospital,deleteHospital,requestBed,viewPatBtn;
         addHospital = findViewById(R.id.addHospital);
         editHospital = findViewById(R.id.editHospital);
@@ -34,7 +31,7 @@ public class ControlRoom extends AppCompatActivity {
         viewPatBtn = findViewById(R.id.viewPatBtn);
 
 
-        //totalRequests = findViewById(R.id.totalRequests);
+        
         addHospital.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
