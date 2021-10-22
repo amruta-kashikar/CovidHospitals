@@ -22,10 +22,10 @@ import java.util.ArrayList;
 
 public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapter.myviewholder>
 {
-    //public Object filteredList;
+    
     FirebaseFirestore db =FirebaseFirestore.getInstance();
     FirebaseAuth mAuth = FirebaseAuth.getInstance();
-    //PatientsList patientsLi
+    
     DeleteHospital dh;
     ArrayList<hospitalModel> detaillist;
 
@@ -69,11 +69,7 @@ public class HospitalListAdapter extends RecyclerView.Adapter<HospitalListAdapte
         return detaillist.size();
     }
 
- /*   public void filteredList(ArrayList<hospitalModel> filterList) {
-        datalist = filterList;
-        notifyDataSetChanged();
-    }
-  */
+ 
 
     class myviewholder extends RecyclerView.ViewHolder implements View.OnClickListener {
 

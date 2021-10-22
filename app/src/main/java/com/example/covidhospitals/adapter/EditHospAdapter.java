@@ -42,7 +42,7 @@ public class EditHospAdapter extends RecyclerView.Adapter<EditHospAdapter.myview
     public EditHospAdapter(ArrayList<hospitalModel> hospmodel,Context cntx) {
 //        ArrayList<hospitalModel> temp= new ArrayList<hospitalModel>();
 //        temp.add(hospmodel.get(0));
-        this.hospmodel =hospmodel;//temp;
+        this.hospmodel =hospmodel;
         this.contextBack=cntx;
     }
 
@@ -67,17 +67,6 @@ public class EditHospAdapter extends RecyclerView.Adapter<EditHospAdapter.myview
         holder.t10.setText(""+hospmodel.get(position).getVentilator());
 
 
-//        System.out.println("getName =>"+hospmodel.get(position).getName());
-//        System.out.println("getArea =>"+hospmodel.get(position).getArea());
-//        System.out.println("getPhone =>"+hospmodel.get(position).getPhone());
-//        System.out.println("getEmail =>"+hospmodel.get(position).getEmail());
-//        System.out.println("getTotal =>"+hospmodel.get(position).getTotal());
-//        System.out.println("getVacant =>"+hospmodel.get(position).getVacant());
-//        System.out.println("getO2 =>"+hospmodel.get(position).getO2());
-//        System.out.println("getNonO2 =>"+hospmodel.get(position).getNonO2());
-//        System.out.println("getIcu =>"+hospmodel.get(position).getIcu());
-//        System.out.println("getVentilator =>"+hospmodel.get(position).getVentilator());
-
         holder.editHosp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,16 +86,13 @@ public class EditHospAdapter extends RecyclerView.Adapter<EditHospAdapter.myview
                 final EditText nonO2B = myview.findViewById(R.id.nonO2Beds);
                 final EditText icuB = myview.findViewById(R.id.icuBeds);
                 final EditText ventilatorB = myview.findViewById(R.id.ventilatorBeds);
-                //TextView emailHospital = myview.findViewById(R.id.emailHospital);
-                //String email1 = email.getText().toString();
-                Log.d("TAGe","email value : " + email.getText().toString());
+                // Log.d("TAGe","email value : " + email.getText().toString());
                 Button update = myview.findViewById(R.id.btnUpdate);
                 //Log.d("TAG", "onClick() returned: " + hospmodel.get(position).getVacant());
                 name.setText(hospmodel.get(position).getName());
                 area.setText(hospmodel.get(position).getArea());
                 phone.setText(hospmodel.get(position).getPhone());
                 email.setText(hospmodel.get(position).getEmail());
-                //password.setText(hospmodel.get(position).getPassword());
                 total.setText(hospmodel.get(position).getTotal());
                 vacantB.setText(""+hospmodel.get(position).getVacant());
 
@@ -154,78 +140,6 @@ public class EditHospAdapter extends RecyclerView.Adapter<EditHospAdapter.myview
                             }
                         });
 
-/*
-                        FirebaseAuth.getInstance().fetchSignInMethodsForEmail(email.getText().toString())
-                                .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull @NotNull Task<SignInMethodQueryResult> task) {
-                                        boolean check = !task.getResult().getSignInMethods().isEmpty();
-                                        if(!check)
-                                        {
-                                            Map<String, Object> map = new HashMap<>();
-                                            map.put("name",name.getText().toString());
-                                            map.put("area",area.getText().toString());
-                                            map.put("phone",phone.getText().toString());
-                                            map.put("email",email.getText().toString());
-                                            //map.put("password",password.getText().toString());
-                                            map.put("total",total.getText().toString());
-                                            map.put("vacant",vacant);
-                                            map.put("o2",o2);
-                                            map.put("nonO2",nonO2);
-                                            map.put("icu",icu);
-                                            map.put("ventilator",ventilator);
-                                            FirebaseFirestore.getInstance().collection("hospital").document(hospmodel.get(position).getId()).update(map)
-                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                        @Override
-                                                        public void onSuccess(Void unused) {
-                                                            dialogPlus.dismiss();
-
-                                                        }
-                                                    }).addOnFailureListener(new OnFailureListener() {
-                                                @Override
-                                                public void onFailure(@NonNull @NotNull Exception e) {
-                                                    dialogPlus.dismiss();
-
-                                                }
-                                            });
-                                        }
-                                        else
-                                        {
-                                            Toast.makeText(contextBack.getApplicationContext(), "Email already exists", Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-
- */
-
-
-//                        Map<String, Object> map = new HashMap<>();
-//                        map.put("name",name.getText().toString());
-//                        map.put("area",area.getText().toString());
-//                        map.put("phone",phone.getText().toString());
-//                        map.put("email",email.getText().toString());
-//                        //map.put("password",password.getText().toString());
-//                        map.put("total",total.getText().toString());
-//                        map.put("vacant",vacant);
-//                        map.put("o2",o2);
-//                        map.put("nonO2",nonO2);
-//                        map.put("icu",icu);
-//                        map.put("ventilator",ventilator);
-//                        FirebaseFirestore.getInstance().collection("hospital").document(hospmodel.get(position).getId()).update(map)
-//                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                    @Override
-//                                    public void onSuccess(Void unused) {
-//                                        dialogPlus.dismiss();
-//
-//                                    }
-//                                }).addOnFailureListener(new OnFailureListener() {
-//                            @Override
-//                            public void onFailure(@NonNull @NotNull Exception e) {
-//                                dialogPlus.dismiss();
-//
-//                            }
-//                        });
-
                     }
                 });
 
@@ -257,7 +171,6 @@ public class EditHospAdapter extends RecyclerView.Adapter<EditHospAdapter.myview
             t10 = itemView.findViewById(R.id.t10);
 
             editHosp = itemView.findViewById(R.id.editHosp);
-            //deleteHosp = itemView.findViewById(R.id.deleteHosp);
         }
         public void setData(model currentObject, int position) {
             this.position = position;

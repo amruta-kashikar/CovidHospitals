@@ -58,9 +58,9 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.myview
     ArrayAdapter<String> adapter1;
     ArrayAdapter<CharSequence> bedAdapter;
     private List<DocumentSnapshot> hospitalSnapList=new ArrayList<>();
-   // private List<>
+   
     ArrayList<String> names=new ArrayList<>();
-    //private String hospitalId;
+   
     CollectionReference namesRef = db.collection("hospital");
     private int position;
     private String typeBed;
@@ -156,8 +156,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.myview
             t7 = itemView.findViewById(R.id.t7);
             allocateBtn = itemView.findViewById(R.id.allocateBtn);
             rejectBtn = itemView.findViewById(R.id.rejectBtn);
-            //generateBtn = itemView.findViewById(R.id.generateBtn);
-//            List<String> names=new ArrayList<>();
+            
             spinner = itemView.findViewById(R.id.spinner);
             spinnerBed = itemView.findViewById(R.id.spinnerBed);
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -167,7 +166,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.myview
             spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                    Toast.makeText(context.getApplicationContext(), "Position :"+position, Toast.LENGTH_LONG).show();
+
                     hospitalId=RequestsAdapter.this.hospitalSnapList.get(position).getId();
                 }
 
@@ -209,9 +208,7 @@ public class RequestsAdapter extends RecyclerView.Adapter<RequestsAdapter.myview
             switch (v.getId())
             {
                 case R.id.allocateBtn:
-  //                  Log.d("TAGr", "onClick() returned: " +this.position );
-//                    Log.d("TAGr", "onClick() returned: " +datalist1.get(this.position).getName() );
-                    //                    this.position
+  
 
                     allocateHospital(datalist1.get(this.position));
                     removeItem(position);

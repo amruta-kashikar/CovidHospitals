@@ -112,13 +112,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         public void setListeners() {
                 approveBtn.setOnClickListener(myviewholder.this);
-                //rejectBtn.setOnClickListener(myviewholder.this);
+                
             }
         @Override
         public void onClick(View v) {
             switch(v.getId()){
                 case R.id.approveBtn:
-//                    updateBeds();
+                   
                     model dardi=datalist.get(position);
                     updateBeds(dardi);
                     removeItem(position);
@@ -130,13 +130,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         }
 
     }
-//    public void deleteItem(int position){
-//       p.deleteData(position);
-//       datalist.remove(position);
-//       notifyItemRemoved(position);
-//       notifyItemRangeChanged(position, datalist.size());
-//
-//    }
+
     public void removeItem(int position){
         p.removeData(position);
         datalist.remove(position);
@@ -148,7 +142,4 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         p.updateBedData(dardi);
     };
 
-//    private void updateBeds() {
-//        p.updateBedData();
-//        };
 }
