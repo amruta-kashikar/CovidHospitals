@@ -35,7 +35,7 @@ public class SigninHospital extends AppCompatActivity {
     FirebaseFirestore db;
     private Button btnSignIn;
     String uid;
-    //ProgressBar progressBar;
+    
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,11 +53,11 @@ public class SigninHospital extends AppCompatActivity {
         icuBeds = findViewById(R.id.icuBeds);
         ventilatorBeds = findViewById(R.id.ventilatorBeds);
         btnSignIn = findViewById(R.id.btnSignIn);
-        //uid = mAuth.getInstance().getCurrentUser().getUid();
+        
         linklogin = new Intent(this, LoginHospital.class);
-        //patientdash = new Intent(this,PatientDashboard.class);
+        
         hospitaldash = new Intent(this,HospitalDashboard.class);
-        //progressBar = findViewById(R.id.progressBar);
+        
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         btnSignIn.setOnClickListener(new View.OnClickListener() {
@@ -189,15 +189,7 @@ public class SigninHospital extends AppCompatActivity {
         //clearData();
     }
 
-/*    private void clearData() {
-        nameHospital.getText().clear();
-        phoneHospital.getText().clear();
-        pwdHospital.getText().clear();
-        emailHospital.getText().clear();
-        totalBeds.getText().clear();
-        vacantBeds.getText().clear();
-    }
- */
+
 
     public void goto_login(View v) {
         TextView Linklogin = (TextView) findViewById(R.id.loginlink);
@@ -311,13 +303,7 @@ public class SigninHospital extends AppCompatActivity {
             totalBeds.requestFocus();
             return;
         }
-/*
-        if (vacant)) {
-            vacantBeds.setError("Enter vacant beds");
-            vacantBeds.requestFocus();
-            return;
-        }
-*/
+
         Map<String, Object> hospital = new HashMap<>();
         hospital.put("name", name);
         hospital.put("area",area);
@@ -333,21 +319,7 @@ public class SigninHospital extends AppCompatActivity {
         hospital.put("ventilator",ventilator);
         db.collection("hospital").document(uid)
                 .set(hospital);
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull @NotNull Exception e) {
-//                Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
-
-        //startActivity(patientdash);
 
 
     }
