@@ -32,7 +32,7 @@ public class UpdateBedData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_bed_data);
-//        hospName = findViewById(R.id.hospName);
+
         vacantBeds = findViewById(R.id.vacantBeds);
         o2Beds = findViewById(R.id.o2Beds);
         nonO2Beds = findViewById(R.id.nonO2Beds);
@@ -85,32 +85,6 @@ public class UpdateBedData extends AppCompatActivity {
     }
 
 
-
-//    private void updateO2() {
-//        int o2 = 0;
-//        if (o2Beds.getText().toString().isEmpty()) {
-//            o2Beds.setError("Enter o2 beds");
-//            o2Beds.requestFocus();
-//            return;
-//        } else {
-//            o2 = Integer.parseInt(o2Beds.getText().toString());
-//            Log.d("vacant", "vacant value: " + o2);
-//            hospitalModel m = new hospitalModel(
-//                    o2
-//            );
-//            db.collection("hospital").document(hospitalId)
-//                    .update(
-//                            "o2", m.getO2()
-//                    )
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Toast.makeText(UpdateBedData.this, "O2 bed count updated successfully", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//        }
-//    }
-
     private void updateValue() {
         int vacant = 0;
         int o2=0;
@@ -141,42 +115,7 @@ public class UpdateBedData extends AppCompatActivity {
                         }
                     });
         }
-//        } else {
-//
-//            Log.d("vacant","vacant value: "+vacant);
-//            hospitalModel m = new hospitalModel(
-//                    vacant
-//            );
-//            db.collection("hospital").document(hospitalId)
-//                    .update(
-//                            "vacant", m.getVacant()
-//                    )
-//                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                        @Override
-//                        public void onSuccess(Void aVoid) {
-//                            Toast.makeText(UpdateBedData.this, "Vacant bed count updated successfully", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//            //clearData();
-//        }
-/*
-        String vacant = vacantBeds.getText().toString().trim();
-        if (!hasValidationErrors(vacant)) {
-            hospitalModel m = new hospitalModel(
-                    vacant
-            );
-            db.collection("hospital").document(hospitalId)
-                    .update(
-                            "vacant", m.getVacant()
-                    )
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(UpdateBedData.this, "Bed count updated successfully", Toast.LENGTH_LONG).show();
-                        }
-                    });
-        }
-*/
+
     }
 
 

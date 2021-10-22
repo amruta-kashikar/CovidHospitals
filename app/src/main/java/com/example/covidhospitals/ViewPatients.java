@@ -22,7 +22,6 @@ public class ViewPatients extends AppCompatActivity {
     ArrayList<hospitalModel> nameslist;
     HospNameAdapter nameAdapter;
     FirebaseFirestore db;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -16,7 +16,6 @@ public class SplashScreen extends AppCompatActivity {
     ImageView imageView1,imageView2;
     TextView textView1,textView2,textView3;
     Animation top,bottom;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
