@@ -53,8 +53,7 @@ public class AddHospital extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //registerUser();
-                //finish();
+               
                 authenticateUser();
             }
         });
@@ -188,18 +187,7 @@ public class AddHospital extends AppCompatActivity {
         hospital.put("ventilator",ventilator);
         db.collection("hospital").document(uid)
                 .set(hospital);
-//                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                    @Override
-//                    public void onSuccess(DocumentReference documentReference) {
-//                        Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                }).addOnFailureListener(new OnFailureListener() {
-//            @Override
-//            public void onFailure(@NonNull @NotNull Exception e) {
-//                Toast.makeText(SigninHospital.this,"",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+
 
 
     }
@@ -334,17 +322,6 @@ public class AddHospital extends AppCompatActivity {
                         }
                     }
                 });
-//        mAuth.createUserWithEmailAndPassword(email, pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-//            @Override
-//            public void onComplete(@NonNull Task<AuthResult> task) {
-//                if (task.isSuccessful()) {
-//                    registerUser();
-//                    Toast.makeText(AddHospital.this, "Hospital registered successfully", Toast.LENGTH_SHORT).show();
-//                    //startActivity(hospitaldash);
-//                } else {
-//                    Toast.makeText(AddHospital.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//        });
+
     }
 }

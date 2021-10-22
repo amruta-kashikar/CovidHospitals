@@ -91,9 +91,7 @@ public class AddPatient extends AppCompatActivity {
         patientArea = findViewById(R.id.patientArea);
         requestBtn = findViewById(R.id.requestBtn);
         btnPickImages = findViewById(R.id.fabChooseImage);
-        //reachingTime = findViewById(R.id.reachingTime);
-        //patientCondition = findViewById(R.id.patientCondition);
-        //patientdashb = new Intent(this, PatientDashboard.class);
+        
         db = FirebaseFirestore.getInstance();
         storage = FirebaseStorage.getInstance();
         reference = db.collection("patient");
@@ -228,17 +226,7 @@ public class AddPatient extends AppCompatActivity {
             patientArea.requestFocus();
             return;
         }
-        /*
-        if (time.isEmpty()){
-            reachingTime.setError("Enter time");
-            reachingTime.requestFocus();
-            return;
-        }
-        if (condition.isEmpty()){
-            patientCondition.setError("Enter condition");
-            patientCondition.requestFocus();
-            return;
-        } */
+        
         Map<String, Object> patient = new HashMap<>();
         patient.put("name",name);
         patient.put("age",age);
@@ -247,28 +235,12 @@ public class AddPatient extends AppCompatActivity {
         patient.put("gender",gender);
         patient.put("area",area);
         patient.put("time",timeVal);
-        //patient.put("hospitalId",hospitalId);
+        
         patient.put("timestamp", FieldValue.serverTimestamp());
         patient.put("symptoms",symptomVal);
         patient.put("id",hospitalId);
 
-        //DocumentReference ref=FirebaseFirestore.getInstance().collection("hospital").document();
-/*        db.collection("patient")
-                .add(patient)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(AddPatient.this,"Requested bed successfully",Toast.LENGTH_SHORT).show();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(AddPatient.this,"Failed to request for bed",Toast.LENGTH_SHORT).show();
-            }
-        });
- */
-        //startActivity(patientdashb);
+        
         WriteBatch batch=FirebaseFirestore.getInstance().batch();
         batch.set(hospitalRef.document(newId),patient, SetOptions.merge());
         batch.set(reference.document(newId),patient,SetOptions.merge());
@@ -335,50 +307,7 @@ public class AddPatient extends AppCompatActivity {
 
     private static final String TAG = "RequestBed";
     private void saveImageDataToFirestore() {
-        /*ProgressDialog progressDialog=new ProgressDialog(RequestBed.this);
-        progressDialog.show();
-        Log.e(TAG, "saveImageDataToFirestore: ");
-        String name = patientName.getText().toString().trim();
-        String hospital = spinnerHospital.getSelectedItem().toString();
-        CollectionReference hospitalRef;
-        if(hospitalId!=null){
-            hospitalRef=FirebaseFirestore.getInstance().collection("hospital").document(hospitalId).collection("booking");
-
-        }else {
-
-            Toast.makeText(this,"Select a hospital",Toast.LENGTH_LONG).show();
-            return;
-        }
-
-        progressDialog.setMessage("Saving uploaded images...");
-        Map<String, Object> dataMap = new HashMap<>();
-        String newId=hospitalRef.document().getId();
-        dataMap.put("name",name);
-        dataMap.put("id",newId);
-        dataMap.put("hospital",hospital);
-        dataMap.put("timestamp", FieldValue.serverTimestamp()  );
-        dataMap.put("images",savedImagesUri);
-//        for (int i=0; i<savedImagesUri.size(); i++){
-//            dataMap.put("image"+i, savedImagesUri.get(i));
-//        }
-        WriteBatch batch=FirebaseFirestore.getInstance().batch();
-        batch.set(hospitalRef.document(newId),dataMap,SetOptions.merge());
-        batch.set(reference.document(newId),dataMap,SetOptions.merge());
-        batch.commit().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                progressDialog.dismiss();
-                coreHelper.createAlert("Success", "Images uploaded and saved successfully!", "OK", "", null, null, null);
-            }
-            }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                progressDialog.dismiss();
-                coreHelper.createAlert("Error", "Images uploaded but we couldn't save them to database.", "OK", "", null, null, null);
-                Log.e("MainActivity:SaveData", e.getMessage());
-            }
-        });
-*/
+        
         ProgressDialog progressDialog=new ProgressDialog(AddPatient.this);
         progressDialog.setMessage("SendingData  ");
         progressDialog.show();
@@ -445,16 +374,7 @@ public class AddPatient extends AppCompatActivity {
             patientArea.requestFocus();
             return;
         }
-        /* if (time.isEmpty()){
-            reachingTime.setError("Enter time");
-            reachingTime.requestFocus();
-            return;
-        }
-        if (condition.isEmpty()){
-            patientCondition.setError("Enter condition");
-            patientCondition.requestFocus();
-            return;
-        } */
+        
         Map<String, Object> patient = new HashMap<>();
         patient.put("name",name);
         patient.put("age",age);
@@ -469,21 +389,7 @@ public class AddPatient extends AppCompatActivity {
         patient.put("symptoms",symptomVal);
         patient.put("id",hospitalId);
 
-        //DocumentReference ref=FirebaseFirestore.getInstance().collection("hospital").document()
-       /* db.collection("patient")
-                .add(patient)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Toast.makeText(RequestBed.this,"Requested bed successfully",Toast.LENGTH_SHORT).show();
-
-                    }
-                }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull @NotNull Exception e) {
-                Toast.makeText(RequestBed.this,"Failed to request for bed",Toast.LENGTH_SHORT).show();
-            }
-        });*/
+        
         //startActivity(patientdashb);
         WriteBatch batch=FirebaseFirestore.getInstance().batch();
         batch.set(hospitalRef.document(newId),patient,SetOptions.merge());
