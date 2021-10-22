@@ -47,7 +47,6 @@ public class DetailsPatAdapter extends RecyclerView.Adapter<DetailsPatAdapter.my
         holder.t2.setText(datalist.get(position).getAge());
         holder.t3.setText(datalist.get(position).getGender());
         holder.t4.setText(datalist.get(position).getSymptoms());
-        //holder.t5.setText(datalist.get(position).getTime());
         holder.t6.setText(datalist.get(position).getPhone());
         holder.t7.setText(datalist.get(position).getGenId());
 
@@ -87,7 +86,6 @@ public class DetailsPatAdapter extends RecyclerView.Adapter<DetailsPatAdapter.my
             t2 = itemView.findViewById(R.id.t2);
             t3 = itemView.findViewById(R.id.t3);
             t4 = itemView.findViewById(R.id.t4);
-            //t5 = itemView.findViewById(R.id.t5);
             t6 = itemView.findViewById(R.id.t6);
             t7 = itemView.findViewById(R.id.t7);
             i1 = itemView.findViewById(R.id.i1);
